@@ -11,8 +11,8 @@ gender varchar(10),
 mob char(10) unique,
 imgpath varchar(100),
 secque varchar(50),
-answer varchar(50)
-status varchar(15);
+answer varchar(50),
+status varchar(15)
 );
 
 create table members
@@ -21,7 +21,7 @@ email varchar(40) not null PRIMARY KEY,
 pswd varchar(20),
 uname varchar(50),
 usertype varchar(10) default 'member',
-status varchar(15);
+status varchar(15)
 );
 
 create table groupmaster
