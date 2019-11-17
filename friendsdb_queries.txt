@@ -1,0 +1,68 @@
+create database friendsdb;
+
+create table users
+(
+email varchar(40) not null PRIMARY KEY,
+pswd varchar(20),
+uname varchar(50),
+usertype varchar(10) default 'member',
+age int,
+gender varchar(10),
+mob char(10) unique,
+imgpath varchar(100),
+secque varchar(50),
+answer varchar(50)
+status varchar(15);
+);
+
+create table members
+(
+email varchar(40) not null PRIMARY KEY,
+pswd varchar(20),
+uname varchar(50),
+usertype varchar(10) default 'member',
+status varchar(15);
+);
+
+create table groupmaster
+(
+grpid int AUTO_INCREMENT PRIMARY KEY,
+grpname varchar(50),
+email varchar(40) FOREIGN KEY REFERENCES users(email),
+createdon datetime,
+status varchar(15)
+);
+
+create table grouprequests
+(
+reqid int AUTO_INCREMENT,
+grpid int FOREIGN KEY REFERENCES groupmaster(grpid),
+email varchar(40) FOREIGN KEY REFERENCES users(email),
+status varchar(15),
+Constraint PK_GrpRequests PRIMARY KEY(reqid, grpid)
+);
+
+create table uploads
+(
+upid int AUTO_INCREMENT PRIMARY KEY,
+docpath varchar(100),
+grpid int FOREIGN KEY REFERENCES groupmaster(grpid),
+status varchar(15)
+);
+
+create table loginlog
+(
+id int AUTO_INCREMENT PRIMARY KEY,
+email varchar(40) FOREIGN KEY REFERENCES users(email),
+lastactivity datetime
+);
+
+create table downloadlog
+(
+email varchar(40) FOREIGN KEY REFERENCES users(email),
+grpid int FOREIGN KEY REFERENCES groupmaster(grpid),
+docpath varchar(100) FOREIGN KEY REFERENCES uploads(docpath),
+dttime datetime,
+status varchar(15),
+Constraint PK_DLog PRIMARY KEY(email, grpid)
+);
