@@ -21,12 +21,13 @@ email varchar(40) not null PRIMARY KEY,
 pswd varchar(20),
 uname varchar(50),
 usertype varchar(10) default 'member',
+imgpath varchar(100),
 status varchar(15)
 );
 
 create table groupmaster
 (
-grpid int AUTO_INCREMENT PRIMARY KEY,
+grpid int IDENTITY(1,1) PRIMARY KEY,
 grpname varchar(50),
 email varchar(40) FOREIGN KEY REFERENCES users(email),
 createdon datetime,
@@ -35,7 +36,7 @@ status varchar(15)
 
 create table grouprequests
 (
-reqid int AUTO_INCREMENT,
+reqid int IDENTITY(1,1),
 grpid int FOREIGN KEY REFERENCES groupmaster(grpid),
 email varchar(40) FOREIGN KEY REFERENCES users(email),
 status varchar(15),
@@ -44,7 +45,7 @@ Constraint PK_GrpRequests PRIMARY KEY(reqid, grpid)
 
 create table uploads
 (
-upid int AUTO_INCREMENT PRIMARY KEY,
+upid int IDENTITY(1,1) PRIMARY KEY,
 docpath varchar(100),
 grpid int FOREIGN KEY REFERENCES groupmaster(grpid),
 status varchar(15)
@@ -52,7 +53,7 @@ status varchar(15)
 
 create table loginlog
 (
-id int AUTO_INCREMENT PRIMARY KEY,
+id int IDENTITY(1,1) PRIMARY KEY,
 email varchar(40) FOREIGN KEY REFERENCES users(email),
 lastactivity datetime
 );
